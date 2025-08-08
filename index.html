@@ -4195,8 +4195,9 @@ blockquote {
         localStorage.setItem('user', JSON.stringify(user));
         localStorage.setItem('loggedInUser', JSON.stringify(user)); // <== Added
 
-        alert('Signup successful!');
-        window.location.href = 'Dashboard.html';
+       alert('Login successful!');
+window.location.href = 'Dashboard/';
+
       });
     }
 
@@ -4213,9 +4214,9 @@ blockquote {
         if (storedUser && storedUser.email === email && storedUser.password === password) {
           // Store who is logged in
           localStorage.setItem('loggedInUser', JSON.stringify(storedUser)); // <== Added
+alert('Login successful!');
+window.location.href = 'Dashboard/';
 
-          alert('Login successful!');
-          window.location.href = 'Dashboard.html';
         } else {
           alert('Invalid credentials. Please try again.');
         }
