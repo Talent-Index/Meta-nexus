@@ -1,1 +1,1611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title> Metanexus</title>
+		<script src="https://cdn.jsdelivr.net/npm/hashconnect@1.4.2/dist/umd/index.min.js"></script>
+
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<!-- ✅ Bootstrap CSS & JS (for responsive design) -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		<!-- ✅ Custom JavaScript for functionality -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+		<!-- Toastr CSS -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+
+		
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PlayToken Hub</title>
+  <style>
+    /* Base Styles */
+			@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+			:root {
+				--primary-gradient: linear-gradient(135deg, #a23fd0 0%, #e97e5e 100%);
+				--button-gradient: linear-gradient(90deg, #a23fd0 0%, #e97e5e 100%);
+				--turquoise-gradient: linear-gradient(135deg, #40E0D0 0%, #27e9c3 100%);
+				--purple-gradient: linear-gradient(135deg, #a23fd0 0%, #8A2BE2 100%);
+				--yellow-gradient: linear-gradient(135deg, #ffcf4b 0%, #FF8C00 100%);
+				--pink-gradient: linear-gradient(135deg, #e97e5e 0%, #e97e5e 100%);
+				--dark-bg: #0A0915;
+				--lighter-bg: #0e0c1a;
+				--card-bg: #14122A;
+				--text-light: #ffffff;
+				--text-secondary: #a0a0b8;
+				--accent: #a23fd0;
+				--accent-pink: #e97e5e;
+				--accent-blue: #4da3ff;
+				--accent-cyan: #27e9c3;
+				--accent-yellow: #ffcf4b;
+				--accent-green: #5cff7f;
+				--accent-red: #ff5a5a;
+			}
+
+			body {
+				font-family: 'Poppins', 'Segoe UI', 'Arial', sans-serif;
+				margin: 0;
+				padding: 0;
+				background-color: var(--dark-bg);
+				color: var(--text-light);
+				line-height: 1.6;
+				position: relative;
+				overflow-x: visible;
+				width: 100%;
+				max-width: 100%;
+			}
+
+   
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      background-color: white;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      height: 40px;
+      cursor: pointer;
+    }
+
+    nav {
+      display: flex;
+      gap: 10px;
+    }
+
+    .login-btn {
+
+background: var(--primary-gradient);
+				color: white;
+				padding: 0.6rem 1.2rem;
+				border-radius: 50px;
+				font-size: 0.9rem;
+				font-weight: 500;
+				border: none;
+				cursor: pointer;
+				transition: transform 0.3s, box-shadow 0.3s;
+				white-space: nowrap;
+				position: relative;
+				overflow: hidden;
+				font-family: 'Poppins', sans-serif;
+				min-width: 150px;
+				text-align: center;
+				transform: translateX(6px);
+
+				
+				margin-right: -6px;
+				/* Add this line to push the buttons closer to heart icon */
+			}
+       .content {
+      padding: 20px;
+      position: relative;
+    }
+
+		.login-btn:hover + .content {
+				color: var(--accent-pink);
+			}
+
+			.login-btn i {
+				font-size: 1.1rem;
+			}
+
+    .content {
+      padding: 20px;
+      position: relative;
+    }
+
+
+    .section {
+      display: none;
+    }
+
+    .active {
+      display: block;
+    }
+
+
+    .tab-section {
+  display: none;
+}
+
+.tab-section.active {
+  display: block;
+}
+
+.features-section {
+				padding: 80px 20px 120px;
+				max-width: 1200px;
+				margin-top: 0px;
+				margin: 0 auto;
+
+				position: relative;
+				z-index: 1;
+}
+    .features-section h2 {
+				font-size: 1.8rem;
+				text-align: center;
+				margin-bottom: 70px;
+				margin-top: 0px;
+				font-weight: 700;
+				position: relative;
+				display: inline-block;
+				left: 50%;
+				transform: translateX(-50%);
+				background:white;
+				-webkit-background-clip: text;
+				background-clip: text;
+				color: transparent;
+				text-shadow: 0 0 20px rgba(162, 63, 208, 0.3);
+			}
+
+			.features-section h2::after {
+				content: '';
+				position: absolute;
+				bottom: -20px;
+				left: 50%;
+				transform: translateX(-50%);
+				width: 80px;
+				height: 5px;
+				background: var(--primary-gradient);
+				border-radius: 10px;
+			}
+.features-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+				gap: 35px;
+			}
+
+			.feature-card {
+				background-color: #ffffff;
+				border-radius: 30px;
+				padding: 10px;
+	
+  
+				transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+				border: 1px solid rgba(30, 30, 60, 0.05);
+				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+				position: relative;
+				overflow: hidden;
+				opacity: 0;
+				transform: translateY(30px);
+				animation: fadeInFeature 0.6s ease-out forwards;
+				color: #1F1A38;
+			}
+
+			.features-grid .feature-card:nth-child(1) {
+				animation-delay: 0.1s;
+			}
+
+			.features-grid .feature-card:nth-child(2) {
+				animation-delay: 0.3s;
+			}
+
+			.features-grid .feature-card:nth-child(3) {
+				animation-delay: 0.5s;
+			}
+
+			@keyframes fadeInFeature {
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			.feature-card::before {
+				content: '';
+				position: absolute;
+				inset: 0;
+				border-radius: 20px;
+				padding: 2px;
+				background: var(--primary-gradient);
+				-webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+				-webkit-mask-composite: xor;
+				mask-composite: exclude;
+				opacity: 0;
+				transition: opacity 0.3s ease;
+			}
+
+			.feature-card:hover {
+				transform: translateY(-10px);
+				box-shadow: 0 15px 35px rgba(162, 63, 208, 0.1);
+			}
+
+			.feature-card:hover::before {
+				opacity: 1;
+			}
+
+			.feature-icon {
+				width: 70px;
+				height: 70px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border-radius: 18px;
+				font-size: 2rem;
+				margin-bottom: 25px;
+				background: linear-gradient(135deg, rgba(162, 63, 208, 0.1) 0%, rgba(233, 126, 94, 0.1) 100%);
+				box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+				transition: all 0.3s ease;
+			}
+
+			.feature-card:hover .feature-icon {
+				transform: scale(1.1) rotate(10deg);
+				box-shadow: 0 12px 25px rgba(162, 63, 208, 0.1);
+			}
+
+			.feature-icon i {
+				background: var(--primary-gradient);
+				-webkit-background-clip: text;
+				background-clip: text;
+				color: transparent;
+			}
+
+			.feature-card h3 {
+				font-size: 1.2rem;
+				margin-bottom: 17px;
+				font-weight: 700;
+				transition: all 0.3s ease;
+				color: #1F1A38;
+			}
+
+			.feature-card:hover h3 {
+				color: var(--accent);
+				transform: translateX(5px);
+			}
+
+			.feature-card p {
+				color: #565773;
+				line-height: 1.9;
+				font-size: 1.0rem;
+			}
+
+      .center-justified-text {
+  text-align: justify;         /* Justifies the text */
+  text-align-last: center;     /* Centers the last line */
+  margin: 0 auto;              /* Centers the block if it has a width */
+  width: 80%;                  /* Optional: controls the width */
+}
+
+
+
+
+.cta-section {
+				background-color: var(--card-bg);
+
+				border-radius: 20px;
+				padding: 60px;
+				max-width: 1000px;
+				margin: 0 auto;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), 0 0 20px rgba(162, 63, 208, 0.1);
+				border: 1px solid rgba(238, 234, 234, 0.05);
+				background-image: linear-gradient(135deg, rgba(162, 63, 208, 0.05) 0%, rgba(233, 126, 94, 0.05) 100%);
+				position: relative;
+				overflow: hidden;
+				z-index: 3;
+			}
+
+			.cta-section::before {
+				content: '';
+				position: absolute;
+				inset: 0;
+				border-radius: 20px;
+				padding: 2px;
+				background: var(--primary-gradient);
+				-webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+				-webkit-mask-composite: xor;
+				mask-composite: exclude;
+				opacity: 0.4;
+			}
+
+			.cta-background {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				border-radius: 20px;
+				z-index: 0;
+			}
+
+			.cta-wave {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				height: 100px;
+				background: linear-gradient(to right, rgba(162, 63, 208, 0.1), rgba(233, 126, 94, 0.1));
+				opacity: 0.5;
+			}
+
+			.cta-wave.wave1 {
+				animation: wave 15s linear infinite;
+				z-index: 1;
+				opacity: 0.3;
+				bottom: -25px;
+			}
+
+			.cta-wave.wave2 {
+				animation: wave 10s linear infinite;
+				animation-delay: -5s;
+				z-index: 2;
+				opacity: 0.2;
+				bottom: -35px;
+				height: 120px;
+			}
+
+			@keyframes wave {
+				0% {
+					transform: translateX(0);
+				}
+
+				50% {
+					transform: translateX(-25%);
+				}
+
+				100% {
+					transform: translateX(0);
+				}
+			}
+
+			.cta-content {
+				flex: 1;
+				position: relative;
+				z-index: 3;
+			}
+
+			.cta-content h2 {
+				font-size: 1rem;
+				margin-bottom: 15px;
+				font-weight: 700;
+				position: relative;
+				display: inline-block;
+        color: white;
+			}
+
+			
+        
+			
+
+			.cta-content p {
+				color: white;
+				/* Grey color */
+				display: flex;
+				align-items: center;
+				gap: 5px;
+				font-size: 0.9;
+			}
+
+			.cta-content p i {
+				color: var(--accent-pink);
+				animation: pulse 1.5s ease-in-out infinite;
+        position:center;
+			}
+
+			@keyframes pulse {
+
+				0%,
+				100% {
+					transform: scale(1);
+				}
+
+				50% {
+					transform: scale(1.2);
+				}
+			}
+
+			.cta-icon {
+				width: 80px;
+				height: 80px;
+				margin-right: 30px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background: linear-gradient(135deg, rgba(162, 63, 208, 0.2) 0%, rgba(233, 126, 94, 0.2) 100%);
+				border-radius: 16px;
+				font-size: 2.2rem;
+				position: relative;
+				z-index: 3;
+				box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+				transition: all 0.3s ease;
+			}
+
+			.cta-section:hover .cta-icon {
+				transform: rotate(15deg) scale(1.1);
+				box-shadow: 0 12px 25px rgba(162, 63, 208, 0.2);
+			}
+
+			.cta-icon i {
+				background: var(--primary-gradient);
+				-webkit-background-clip: text;
+				background-clip: text;
+				color: transparent;
+			}
+.cta-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 40px;
+}
+
+.cta-image-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.cta-image {
+  max-width: 90%; /* Adjust how much of CTA it covers */
+  height: auto;
+  opacity: 0.9;
+  object-fit: contain;
+}
+
+
+
+
+
+.no-bg-section {
+  padding: 60px 20px;
+  background-color: transparent; /* optional, can remove */
+}
+.section-title {
+  color: white;
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 40px;
+}
+.section-title:after {
+				content: '';
+				position: absolute;
+				bottom: -20px;
+				left: 50%;
+				transform: translateX(-50%);
+				width: 80px;
+				height: 5px;
+				background: var(--primary-gradient);
+				border-radius: 10px;
+			}
+
+.four-column-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.column {
+  text-align: center;
+  padding: 20px;
+}
+
+.column img {
+  width: 100px;
+  height: 100px;     /* Sets a fixed height */
+  object-fit: cover; /* Ensures image fills space without stretching */
+  border-radius: 10px; /* Optional: adds rounded corners */
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.column h3 {
+  font-size: 1.2em;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.column ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  text-align: left;
+}
+
+.features-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.side-image {
+  width: 100px; /* Adjust as needed */
+  height: auto;
+  margin-top: 20px;
+}
+
+.center-justified-text {
+  text-align: center;
+  max-width: 500px;
+}
+
+
+
+.section-wrapper {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  margin-left: 180px;
+}
+
+.side-line {
+  width: 8px;
+  background: var(--primary-gradient);
+  height: 470px;
+  border-radius: 4px;
+  margin-right: 20px;
+}
+
+.text-block {
+  max-width: 900px;
+  
+  align-items: center;
+}
+
+.text-block h2 {
+  margin-top: 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.text-block p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: white;
+  text-align: center;
+}
+
+
+.developer-icon {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-bottom: 10px;
+  position: center;
+  align-items: center;
+}
+
+
+/* Modal Styles */
+			.modal {
+				
+				display: none;
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(10, 9, 21, 0.9);
+				z-index: 1000;
+				align-items: center;
+				justify-content: center;
+				backdrop-filter: blur(5px);
+				animation: fadeIn 0.3s ease;
+				margin-top: 30px;
+			}
+
+			.modal-content {
+				background-color: var(--card-bg);
+				border-radius: 20px;
+				padding: 40px;
+				width: 450px;
+				max-width: 90%;
+				position: relative;
+				box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 20px rgba(162, 63, 208, 0.15);
+				border: 1px solid rgba(255, 255, 255, 0.05);
+				animation: slideUp 0.3s ease;
+			}
+
+			.modal-content::before {
+				content: '';
+				position: absolute;
+				inset: 0;
+				border-radius: 20px;
+				padding: 2px;
+				background: var(--primary-gradient);
+				-webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+				-webkit-mask-composite: xor;
+				mask-composite: exclude;
+				opacity: 0.4;
+			}
+
+			@keyframes slideUp {
+				from {
+					transform: translateY(30px);
+					opacity: 0;
+				}
+
+				to {
+					transform: translateY(0);
+					opacity: 1;
+				}
+			}
+
+			.close-modal {
+				position: absolute;
+				top: 20px;
+				right: 20px;
+				background: none;
+				border: none;
+				color: #bbc4d1;
+				font-size: 1.5rem;
+				cursor: pointer;
+				transition: all 0.3s ease;
+				width: 36px;
+				height: 36px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border-radius: 50%;
+				z-index: 10;
+			}
+
+			.close-modal:hover {
+				color: white;
+				background-color: rgba(255, 255, 255, 0.1);
+				transform: rotate(90deg);
+			}
+
+			.modal h2 {
+				text-align: center;
+				margin-bottom: 30px;
+				font-size: 2rem;
+				font-weight: 700;
+				background: var(--primary-gradient);
+				-webkit-background-clip: text;
+				background-clip: text;
+				color: transparent;
+				position: relative;
+			}
+
+			.modal h2::after {
+				content: '';
+				position: absolute;
+				bottom: -10px;
+				left: 50%;
+				transform: translateX(-50%);
+				width: 50px;
+				height: 4px;
+				background: var(--primary-gradient);
+				border-radius: 10px;
+			}
+
+			.form-group {
+				margin-bottom: 5px;
+				position: relative;
+			}
+
+			.form-group label {
+				display: block;
+				margin-bottom: 10px;
+				color: #bbc4d1;
+				font-weight: 500;
+				font-size: 1.05rem;
+				transition: all 0.3s ease;
+			}
+
+			.form-group input {
+				width: 100%;
+				padding: 8px;
+				background-color: var(--dark-bg);
+				border: 1px solid rgba(255, 255, 255, 0.1);
+				border-radius: 10px;
+				color: white;
+				font-size: 1rem;
+				transition: all 0.3s ease;
+				font-family: 'Poppins', sans-serif;
+			}
+
+			.form-group input:focus {
+				border-color: rgba(162, 63, 208, 0.5);
+				box-shadow: 0 0 0 3px rgba(162, 63, 208, 0.2);
+				outline: none;
+			}
+
+			.form-group input:focus+label {
+				color: var(--accent);
+			}
+
+			.form-submit {
+				width: 100%;
+				padding: 16px;
+				border-radius: 50px;
+				background: var(--primary-gradient);
+				color: white;
+				border: none;
+				font-weight: 600;
+				cursor: pointer;
+				transition: all 0.3s ease;
+				font-size: 1.05rem;
+				margin-top: 15px;
+				position: relative;
+				overflow: hidden;
+				font-family: 'Poppins', sans-serif;
+			}
+
+			.form-submit::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(to right, var(--accent-pink), var(--accent));
+				opacity: 0;
+				transition: opacity 0.3s ease;
+			}
+
+			.form-submit:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 6px 15px rgba(162, 63, 208, 0.3);
+			}
+
+			.form-submit:hover::before {
+				opacity: 1;
+			}
+
+			.form-submit span {
+				position: relative;
+				z-index: 2;
+			}
+
+			.modal-footer {
+				margin-top: 30px;
+				text-align: center;
+				color: #bbc4d1;
+			}
+
+			.modal-footer a {
+				color: white;
+				font-weight: 500;
+				transition: all 0.3s ease;
+				position: relative;
+				display: inline-block;
+			}
+
+			.modal-footer a::after {
+				content: '';
+				position: absolute;
+				width: 100%;
+				height: 2px;
+				bottom: -2px;
+				left: 0;
+				background: var(--primary-gradient);
+				transform: scaleX(0);
+				transform-origin: right;
+				transition: transform 0.3s ease;
+				border-radius: 10px;
+			}
+
+			.modal-footer a:hover {
+				color: var(--accent-pink);
+			}
+
+			.modal-footer a:hover::after {
+				transform: scaleX(1);
+				transform-origin: left;
+			}
+
+.signup-btn  {
+
+background: var(--primary-gradient);
+				color: white;
+				padding: 0.6rem 1.2rem;
+				border-radius: 50px;
+				font-size: 0.9rem;
+				font-weight: 500;
+				border: none;
+				cursor: pointer;
+				transition: transform 0.3s, box-shadow 0.3s;
+				white-space: nowrap;
+				position: relative;
+				overflow: hidden;
+				font-family: 'Poppins', sans-serif;
+				min-width: 150px;
+				text-align: center;
+				transform: translateX(6px);
+
+				
+				margin-right: -6px;
+				/* Add this line to push the buttons closer to heart icon */
+			}
+
+			.login-btn:hover {
+				color: var(--accent-pink);
+			}
+       .content {
+      padding: 20px;
+      position: relative;
+    }
+
+		
+
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="https://i.postimg.cc/HL0D9WLs/Bold-Wordmark-Logo-with-Gradient-Effect-removebg-preview.png" alt="Logo" class="logo" onclick="window.location.href='playtoken-main.html'" />
+
+    <nav>
+      <button class="login-btn" onclick="showSection('about')">About</button>
+       <button class="login-btn" onclick="showSection('developers')">Developers</button>
+      <button class="login-btn" onclick="showSection('publishers')">Publishers</button>
+      <button class="login-btn" onclick="showSection('games')">Games</button>
+      <button class="login-btn" onclick="showSection('rss')">RSS Feed</button>
+    </nav>
+  </header>
+
+  
+     
+    <div id="about" class="section active">
+
+			<div class="features-section">
+				<h2>THE PREMIUM HTML5 <br>GAMES PLATFORM</h2>
+
+				
+       <div class="center-justified-text">
+  <p>
+  MetaNexus connects top-quality game developers and publishers to<br> reach millions of online players. 
+  Our global HTML5 network empowers developers <br>and publishers of all sizes to grow their business. </p>
+</div>
+
+
+<div class="cta-section">
+        <div class="cta-background">
+          <div class="cta-wave wave1"></div>
+          <div class="cta-wave wave2"></div>
+        </div>
+        <div class="features-grid">
+				
+            
+     <!-- Developer Icon -->	<div class="feature-card">
+         <img src="https://i.postimg.cc/nLW1Lh1x/image-removebg-preview-16.png" alt="Developer Icon" class="developer">
+
+						
+						<h3>Developers</h3>
+						<p>
+Are you an established game studio or ambitious indie developer looking to grow on the web?
+<br>
+We take care of your creation and put it in front of millions of players through our many thousands of affiliate partners.
+We take care of your brand, your IP and your ROI. 
+
+Let's get you up and running!
+						</p>
+						<button class="login-btn" id="loginButton">
+							
+							<span> Grow your Audience </span>
+  </button>
+					</div>
+
+					<div class="feature-card">
+						
+						
+         <img src="https://i.postimg.cc/y6ySQNSN/image-removebg-preview-17.png" alt="Developer Icon" class="developer">
+
+						<h3> Publishers</h3>
+<p>
+Are you a gaming website owner? Or a media, app, telco or other service provider? 
+<br>
+We offer a terrific portfolio of top-quality games and industry-ready solutions that will delight your audiences and create a profitable partnership. 
+
+Let's get you up and running!!
+</p>
+
+				
+
+					
+<div class="modal-footer">
+  
+    <a href="#" id="showSignupBtn" class="signup-btn">Publish Delightful Games</a>
+  </p>
+</div>
+					</div>
+
+</div>
+    	
+
+</div>
+      </div>
+      
+   <div class="features-section" >
+ <h2 >MetaNexus: The Launchpad for Games</h2>
+
+
+	<div class="section-wrapper">
+   <div class="side-line"></div>
+  <div class="text-block">
+	
+	<p>
+		For Game Developers<br>
+Why build on Meta Nexus?
+The future of gaming is instant, borderless, and player-first — and that's exactly what Meta Nexus offers. As a developer, you’ll gain access to a fast-growing audience of players who value convenience and freedom. With Meta Nexus, there’s no app store gatekeeping — simply upload your HTML5 game, share your link, and let users click and play. No installs. No delays. Just gameplay.
+
+Build once, deploy everywhere.
+Whether your users are on desktop, mobile, or tablet, your game will be ready to run right in their browser. Stop worrying about platform limitations — Meta Nexus makes it easy to launch cross-device browser games without needing to rewrite your code for Android, iOS, or consoles.
+
+By joining Meta Nexus, you’ll be part of a next-gen gaming ecosystem where you stay in control, earn from your work, and get discovered by communities that matter. Your code. Your rules. Your audience.
+<br>
+<br>
+ For Publishers and Partners<br>
+
+Boost engagement. Multiply playtime.
+Looking to increase traffic and keep users on your site longer? Meta Nexus lets you integrate a rich library of HTML5 blockchain-ready games that run instantly, with zero downloads or installations. Our games work on any OS or device — whether your audience is on iOS, Android, Mac, Windows, or smart TVs.
+
+Get ahead with decentralized content.
+With our Web3-ready infrastructure, you don’t just stream games — you empower your users with a secure, immersive experience. From classic arcade titles to modern multiplayer games, Meta Nexus connects you to premium content that enhances your platform's value.
+
+Join a fast-growing network of publishers and brands who are shaping the future of gaming distribution. With Meta Nexus, your users stay longer, play more, and come back for the experience.
+
+</p>
+  </div>
+	</div>
+</div>
+</div>
+  </div>
+  <div id="developers" class="section">
+    <div class="features-section">
+  <h2>NEW AUDIENCES FOR YOUR GAMES</h2>
+  <div class="features-content">
+    
+    <div class="center-justified-text">
+      <p>
+        Show your game to millions of new players on the web. <br>
+        Create your account, submit your game and start monetizing.
+      </p>
+<br>
+
+	 
+
+    </div>
+    
+  </div>
+</div>
+
+
+
+
+
+
+    <section class="no-bg-section">
+      <h2 class="section-title">Developer partner program</h2>
+
+<div class="cta-section">
+        <div class="cta-background">
+          <div class="cta-wave wave1"></div>
+          <div class="cta-wave wave2"></div>
+        </div>
+<div class="cta-icon"><i class="fas fa-ghost"></i></div>
+        <div class="cta-content">
+    <h2> Boost your revenues with Metanexus</h2>      
+     <p>
+  
+  MetaNexus is the ultimate platform for HTML5 game developer publishing. As a game developer, you will earn revenue shares while reaching and monetizing your games with millions of users.
+
+Join MetaNexus by registering on the MetaNexus Dashboard with a few clicks, integrate our lightweight SDK, and start submitting y`our first games.
+MetaNexus will host your games on secure servers, plus we will take care of optimization, Q&A, and your HTML5 games will go live on hundreds of certified partner sites. It's easier than App Store submissions, too.
+
+Ready to get rock-star exposure? Get your game seen and start making real money now!
+</p>
+<br>
+ <div style=" justify-content: center; align-items: center; ">
+   
+</div>
+
+    </div>
+</div>
+</section>
+
+<section class="no-bg-section">
+    <h2 class="section-title">Benefits for you</h2>
+
+    <div class="four-column-grid">
+      <div class="column">
+        <img src="https://i.postimg.cc/R0DnRZSW/image-removebg-preview.png" alt="Game 1">
+        <h3>Easy Integration</h3>
+<ul>
+  <li>Integrate MetaNexus's light SDK</li>
+  <li>Submit your game with just a few clicks</li>
+  <li>We take care of everything else!</li>
+</ul>
+
+      </div>
+
+      <div class="column">
+        <img src="https://i.postimg.cc/02k2zqvF/image-removebg-preview-1.png" alt="Game 2">
+        <h3>Hassle-Free Launch</h3>
+<ul>
+  <li>We take care of code optimization</li>
+  <li>Millions of gamers and high RPMs</li>
+  <li>Approval and launch updates</li>
+  <li>IP protection and brand safety</li>
+</ul>
+
+      </div>
+
+      <div class="column">
+        <img src="https://i.postimg.cc/rFXZj8sZ/image-removebg-preview-2.png" alt="Game 3">
+      <h3>Great Revenues</h3>
+<ul>
+  <li>45% Revenue Share</li>
+  <li>Monitoring and Reporting Dashboard</li>
+  <li>RPMs Revenue-per-Game detail</li>
+</ul>
+
+      </div>
+
+      <div class="column">
+        <img src="https://i.postimg.cc/nLyqxh66/image-removebg-preview-3.png" alt="Game 4">
+        <h3>Long-Term Partnership</h3>
+<ul>
+  <li>24/7 Support</li>
+  <li>Dedicated Account Manager</li>
+  <li>ROI Optimization Focus</li>
+  <li>Custom Developer Solutions</li>
+</ul>
+
+      </div>
+    </div>
+  </section>
+
+
+
+ 
+
+
+<br> 
+
+  <h2 class="section-title">YOU'RE IN GOOD COMPANY</h2>
+
+  <div class="cta-section">
+    <div class="cta-background">
+      <div class="cta-wave wave1"></div>
+      <div class="cta-wave wave2"></div>
+    </div>
+
+    <div class="cta-image-wrapper">
+      <img src="https://i.postimg.cc/VvCqkVCc/image-removebg-preview-11.png" alt="Decorative" class="cta-image">
+    </div>
+  </div>
+<section class="no-bg-section">
+
+   <h2 class="section-title">sign up to get started</h2>
+
+  <div class="cta-section">
+    <div class="cta-background">
+      <div class="cta-wave wave1"></div>
+      <div class="cta-wave wave2"></div>
+    </div>
+
+    <div class="cta-image-wrapper">
+      <img src="https://i.postimg.cc/VsWs3FTS/image-removebg-preview-12.png" alt="Decorative" class="cta-image">
+    </div>
+  </div>
+</section>
+<section class="no-bg-section">
+
+   <h2 class="section-title">LIGHTWEIGHT GAME SDK INTEGRATION</h2>
+   <div class="center-justified-text">
+  <p>Start integrating MetaNexus developer friendly SDK
+  </p>
+</div>
+
+  <div class="cta-section">
+    <div class="cta-background">
+      <div class="cta-wave wave1"></div>
+      <div class="cta-wave wave2"></div>
+    </div>
+
+    <div class="cta-image-wrapper">
+      <img src="https://i.postimg.cc/pdL1LPXb/image-removebg-preview-13.png" alt="Decorative" class="cta-image">
+    </div>
+  </div>
+  <div class="center-justified-text">
+  <p>Read the documentation and validate your integration with our toolkit,<br>
+     then you're ready to submit your game!
+  </p>
+
+
+
+
+ 
+
+</div>
+</section>
+
+
+</div>
+
+
+
+ <div id="publishers" class="section ">
+  
+<div class="features-section">
+				<h2>Top games for publishers</h2>
+       <div class="center-justified-text">
+  <p>
+ Get the best HTML5 games in the industry. You can use your API,<br> free white-label portals, or just embed games. </p>
+</div>
+
+
+
+
+
+
+<section class="no-bg-section">
+      <h2 class="section-title">Publisher Affiliate Program</h2>
+
+<div class="cta-section">
+        <div class="cta-background">
+          <div class="cta-wave wave1"></div>
+          <div class="cta-wave wave2"></div>
+        </div>
+<div class="cta-icon"><i class="fas fa-rocket"></i></div>
+        <div class="cta-content">
+    <h2> Boost your revenues with Metanexus</h2>      
+     <p>
+  
+  The MetaNexus Affiliate Program lets publishers monetize high-quality HTML5 games for websites and apps with ready-made ADS. Our catalog includes some of the most famous brands and game studios in the world. MetaNexus games are tested on real devices and have wide compatibility: you don't need to worry about which devices your users are using.
+  <br><br>
+  Join the Affiliate Program by registering on the MetaNexus Dashboard and you'll be able to publish games on your digital properties in minutes. 
+  You’ll receive a continuous stream of fresh content, with new HTML5 games every week. The integration works via direct embedding, JSON API, or ready-made white-label websites. 
+  <br><br>
+  Boost your bottom line now!
+</p>
+
+    </div>
+</div>
+</section>
+<section class="no-bg-section">
+    <h2 class="section-title">Benefits for you</h2>
+
+    <div class="four-column-grid">
+      <div class="column">
+        <img src="https://i.postimg.cc/R0DnRZSW/image-removebg-preview.png" alt="Game 1">
+        <h3>TOP-QUALITY GAMES</h3>
+        <ul>
+          <li>Exciting gameplay</li>
+          <li>Multiplayer</li>
+          <li>Cross-platform</li>
+        </ul>
+      </div>
+
+      <div class="column">
+        <img src="https://i.postimg.cc/02k2zqvF/image-removebg-preview-1.png" alt="Game 2">
+        <h3>FREE GAMING PORTAL</h3>
+        <ul>
+          <li>Adventure-packed</li>
+          <li>Stunning graphics</li>
+          <li>New updates weekly</li>
+        </ul>
+      </div>
+
+      <div class="column">
+        <img src="https://i.postimg.cc/rFXZj8sZ/image-removebg-preview-2.png" alt="Game 3">
+        <h3>GREAT REVENUES</h3>
+        <ul>
+          <li>HTML5 compatible</li>
+          <li>High replay value</li>
+          <li>Mobile-friendly</li>
+        </ul>
+      </div>
+
+      <div class="column">
+        <img src="https://i.postimg.cc/nLyqxh66/image-removebg-preview-3.png" alt="Game 4">
+        <h3>LIVELY PARTNERSHIP</h3>
+        <ul>
+          <li>Casual and fun</li>
+          <li>No install needed</li>
+          <li>Lightweight</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+<h2 class="section-title">YOU'RE IN GOOD COMPANY</h2>
+
+  <div class="cta-section">
+    <div class="cta-background">
+      <div class="cta-wave wave1"></div>
+      <div class="cta-wave wave2"></div>
+    </div>
+
+    <div class="cta-image-wrapper">
+      <img src="https://i.postimg.cc/XqFdHGx2/image-removebg-preview-4.png" alt="Decorative" class="cta-image">
+    </div>
+  </div>
+<br>
+<br>
+<br>
+<br>
+  <h2 class="section-title">Publisher Gaming Solutions</h2>
+
+  <div class="cta-section">
+        <div class="cta-background">
+          <div class="cta-wave wave1"></div>
+          <div class="cta-wave wave2"></div>
+        </div>
+<div class="cta-icon"><i class="fas fa-bullhorn"></i></div>
+        <div class="cta-content">
+    <h2> Engage, convert and retain your users with Metanexus</h2>      
+     <p>
+  
+  Are you a media company, telco, brand or service company interested in the MetaNexus catalog? Or do you run an <br>app and want to publish our games to engage your users?<br>
+We are ready to license our games and provide you with the right industry-proven gaming solutions that will take your product to the next level.
+<br>
+<br>
+We're eager to hear from you, so contact us now!
+</p>
+
+    </div>
+</div>
+
+  <section class="no-bg-section">
+    <h2 class="section-title">Benefits for your company</h2>
+
+    <div class="four-column-grid">
+      <div class="column">
+        <img src="https://i.postimg.cc/zGwz5Gbz/image-removebg-preview-6.png" alt="Game 1">
+        <h3>App</h3>
+<ul>
+  <li>400+ Games</li>
+  <li>Turnkey white label game portal</li>
+  <li>Top brands and game studios</li>
+  <li>iOS and Android ready</li>
+  <li>Multiple integration possibilities</li>
+  <li>Paywall and bundling ready</li>
+</ul>
+
+      </div>
+
+      <div class="column">
+        <img src="https://i.postimg.cc/mrzGkZh1/image-removebg-preview-7.png" alt="Game 2">
+        <h3>Media</h3>
+<ul>
+  <li>Top-quality, brand-safe games</li>
+  <li>New games every week</li>
+  <li>Cross-platform compatibility</li>
+  <li>iOS and Android ready</li>
+</ul>
+
+      </div>
+
+      <div class="column">
+        <img src="https://i.postimg.cc/W4rfxdh8/image-removebg-preview-8.png" alt="Game 3">
+       <h3>TELCO, OEM</h3>
+<ul>
+  <li>Branded social gaming solution</li>
+  <li>Freemium/Paid go-to-market integration</li>
+  <li>Licensing or revenue sharing</li>
+  <li>Quick integration</li>
+  <li>iOS and Android ready</li>
+</ul>
+
+      </div>
+
+      <div class="column">
+        <img src="https://i.postimg.cc/9MkRTQB3/image-removebg-preview-10.png" alt="Game 4">
+        <h3>SERVICE PROVIDERS</h3>
+<ul>
+  <li>400+ High quality games</li>
+  <li>High conversion rate game brands</li>
+  <li>Turnkey white label game portal</li>
+  <li>20+ Languages</li>
+  <li>iOS and Android Ready</li>
+</ul>
+
+      </div>
+    </div>
+  </section>
+<br>
+<br>
+  <h2 class="section-title">you are in good hands</h2>
+
+  <div class="cta-section">
+    <div class="cta-background">
+      <div class="cta-wave wave1"></div>
+      <div class="cta-wave wave2"></div>
+    </div>
+
+    <div class="cta-image-wrapper">
+      <img src="https://i.postimg.cc/v8SG068c/image-removebg-preview-5.png" alt="Decorative" class="cta-image">
+    </div>
+  </div>
+</section>
+
+</div>
+</div>
+  </div>
+</section>
+ 
+</div>
+
+<!-- Developer Login Modal -->
+<!-- Developer Login Modal -->
+<!-- Developer Application Modal -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <button class="close-modal"><i class="fas fa-times"></i></button>
+    <h2>Developer Application</h2>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="devName">Full Name</label>
+        <input type="text" id="devName" name="from_name" required>
+      </div>
+      <div class="form-group">
+        <label for="devEmail">Email Address</label>
+        <input type="email" id="devEmail" name="reply_to" required>
+      </div>
+      <div class="form-group">
+        <label for="devPortfolio">Portfolio Link</label>
+        <input type="url" id="devPortfolio" name="portfolio" required>
+      </div>
+      <button type="submit" class="form-submit"><span>Submit Application</span></button>
+    </form>
+    <div class="modal-footer">
+      <p>Don't have an account? <a href="#" id="showSignupBtn">Sign Up</a></p>
+    </div>
+  </div>
+</div>
+
+
+<div id="signupModal" class="modal">
+  <div class="modal-content">
+    <button class="close-modal"><i class="fas fa-times"></i></button>
+    <h2>Publisher Sign-Up</h2>
+    <form id="signupForm">
+      <div class="form-group">
+        <label for="pubName">Full Name</label>
+        <input type="text" id="pubName" name="from_name" required>
+      </div>
+      <div class="form-group">
+        <label for="pubEmail">Email Address</label>
+        <input type="email" id="pubEmail" name="reply_to" required>
+      </div>
+      <div class="form-group">
+        <label for="pubBio">Short Bio / Content Niche</label>
+        <textarea id="pubBio" name="bio" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="pubPlatform">Platform / Blog Link</label>
+        <input type="url" id="pubPlatform" name="platform" required>
+      </div>
+      <button type="submit" class="form-submit"><span>Create Account</span></button>
+    </form>
+    <div class="modal-footer">
+      <p>Already have an account? <a href="#" id="showLoginBtn">Log In</a></p>
+    </div>
+  </div>
+</div>
+
+
+</body>
+
+
+ <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+  <script>
+  function showSection(id) {
+    // Hide all sections
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(section => {
+      section.classList.remove('active');
+    });
+
+    // Show selected section
+    const target = document.getElementById(id);
+    if (target) {
+      target.classList.add('active');
+    }
+  }
+const loginButton = document.getElementById('loginButton');
+				const logoutButton = document.getElementById('logoutButton');
+				const connectButton = document.getElementById('connectButton');
+				const connectNowButton = document.getElementById('connectNowButton');
+				const mobileWalletConnect = document.getElementById('mobileWalletConnect');
+
+				const loginModal = document.getElementById('loginModal');
+				const signupModal = document.getElementById('signupModal');
+				const walletConnectModal = document.getElementById('walletConnectModal');
+
+				const showSignupBtn = document.getElementById('showSignupBtn');
+				const showLoginBtn = document.getElementById('showLoginBtn');
+				const closeButtons = document.querySelectorAll('.close-modal');
+				const connectHashPackBtn = document.getElementById('connectHashPackBtn');
+
+				// Cards fade in on scroll
+				const observer = new IntersectionObserver((entries) => {
+					entries.forEach(entry => {
+						if (entry.isIntersecting) {
+							entry.target.style.opacity = '1';
+							entry.target.style.transform = 'translateY(0)';
+						}
+					});
+				}, {
+					threshold: 0.1
+				});
+
+				document.querySelectorAll('.domain-card, .feature-card').forEach(card => {
+					observer.observe(card);
+				});
+
+				// Functions to show and hide modals
+				function showModal(modal) {
+					if (modal) {
+						modal.style.display = 'flex';
+						document.body.style.overflow = 'hidden'; // Prevent background scrolling
+					}
+				}
+
+				function hideAllModals() {
+					if (loginModal) loginModal.style.display = 'none';
+					if (signupModal) signupModal.style.display = 'none';
+					if (walletConnectModal) walletConnectModal.style.display = 'none';
+					document.body.style.overflow = ''; // Re-enable scrolling
+				}
+
+				// Add event listeners to buttons
+				if (loginButton) {
+					loginButton.addEventListener('click', function() {
+						showModal(loginModal);
+					});
+				}
+				
+				if (logoutButton) {
+					logoutButton.addEventListener('click', function() {
+						fetch(ajaxurl, {
+							method: 'POST',
+							credentials: 'same-origin',
+							headers: {
+								'Content-Type': 'application/x-www-form-urlencoded'
+							},
+							body: new URLSearchParams({
+								action: 'custom_user_logout'
+							})
+						})
+							.then(res => res.json())
+							.then(result => {
+							if (result.success) {
+ 								//toast.success(result.data.message || 'Logged out successfully!');
+								window.location.href = '/home';
+							} else {
+								//toast.error(result.data.message || 'Logout failed.');
+							}
+						})
+							.catch(err => {
+							//console.error('Logout error:', err);
+							//toast.error('Something went wrong.');
+						});
+					});
+				}
+
+				if (connectButton) {
+					connectButton.addEventListener('click', function() {
+						showModal(walletConnectModal);
+					});
+				}
+
+				if (connectNowButton) {
+					connectNowButton.addEventListener('click', function() {
+						showModal(walletConnectModal);
+					});
+				}
+
+				if (mobileWalletConnect) {
+					mobileWalletConnect.addEventListener('click', function() {
+						showModal(walletConnectModal);
+					});
+				}
+
+				if (showSignupBtn) {
+					showSignupBtn.addEventListener('click', function(e) {
+						e.preventDefault();
+						hideAllModals();
+						showModal(signupModal);
+					});
+				}
+
+				if (showLoginBtn) {
+					showLoginBtn.addEventListener('click', function(e) {
+						e.preventDefault();
+						hideAllModals();
+						showModal(loginModal);
+					});
+				}
+
+				// Close buttons
+				closeButtons.forEach(function(button) {
+					button.addEventListener('click', hideAllModals);
+				});
+
+				// Close when clicking outside the modal
+				window.addEventListener('click', function(e) {
+					if (e.target.classList.contains('modal')) {
+						hideAllModals();
+					}
+				});
+
+				// Close with Escape key
+				document.addEventListener('keydown', function(e) {
+					if (e.key === 'Escape') {
+						hideAllModals();
+					}
+				});
+
+				// Handle form submissions
+
+// Initialize EmailJS
+  (function () {
+    emailjs.init("z5JTlfpKjL43iUj0I"); // Replace with your actual public key from EmailJS
+  })();
+
+  // Developer Form Submission
+  document.getElementById('loginForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    emailjs.sendForm('service_kkn7yo8', 'template_sd3vg6d', this)
+      .then(function () {
+        alert("Developer application submitted successfully! please check your email ");
+        document.getElementById('loginForm').reset();
+      }, function (error) {
+        alert("Failed to submit developer application.");
+        console.error('Developer Form Error:', error);
+      });
+  });
+
+  // Publisher Form Submission
+  document.getElementById('signupForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    emailjs.sendForm('service_kkn7yo8', 'template_sd3vg6d', this)
+      .then(function () {
+        alert("Publisher sign-up submitted successfully please check your email!");
+		
+        document.getElementById('signupForm').reset();
+      }, function (error) {
+        alert("Failed to submit publisher form.");
+        console.error('Publisher Form Error:', error);
+      });
+  });
+
+
+				
+				
+</script>
+
+</body>
+</html>
