@@ -1784,17 +1784,7 @@ text-align: center;
 </body>
 <script>
 
-  const userData = localStorage.getItem('loggedInUser');
-    const user = userData ? JSON.parse(userData) : null;
 
-    if (!user) {
-      window.location.href = 'landing.html'; // or index.html
-    } else {
-      const headerEl = document.getElementById('userHeader');
-      if (headerEl) {
-        headerEl.innerText = `Hello, ${user.fullName}`;
-      }
-    }
    // Get buttons
 const premiumBtn = document.getElementById('premiumBtn');
 const walletBtn = document.getElementById('walletBtn');
@@ -2027,7 +2017,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeBtns = document.querySelectorAll('.close-modal');
     const popup = document.getElementById('connectingPopup');
 
+  const userData = localStorage.getItem('loggedInUser');
+    const user = userData ? JSON.parse(userData) : null;
 
+    if (!user) {
+      window.location.href = 'landing.html'; // or index.html
+    } else {
+      const headerEl = document.getElementById('userHeader');
+      if (headerEl) {
+        headerEl.innerText = `Hello, ${user.fullName}`;
+      }
+    }
 
     // Open modal
     connectBtn.addEventListener('click', () => {
