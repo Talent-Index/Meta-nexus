@@ -1,0 +1,170 @@
+.font-space-mono {
+    font-family: 'Space Mono', monospace;
+  }
+
+  .font-work-sans {
+    font-family: 'Work Sans', sans-serif;
+  }
+
+  .text-footer {
+    color: #b9b6b6 !important;
+  }
+
+  body {
+    overflow-x: hidden !important;
+  
+  }
+
+
+  .no-padding-overflow * {
+    box-sizing: border-box;
+  }
+
+  #Magic-mash {
+    background-image: linear-gradient(rgba(161, 89, 255, 0), rgba(162, 89, 255, 1)), url(img/NFT-highMobile.png);
+    background-size: cover;
+    align-items: center;
+    justify-content: center;
+    height: 120vh;
+  }
+
+  .custom-placeholder::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+    opacity: 1;
+  }
+
+
+  @media (max-width: 768px) {
+    #Magic-mash {
+      background-size: cover;
+      background-position: top;
+      height: 80vh;
+      background-repeat: no-repeat;
+
+    }
+  }
+
+  .slight-hover {
+    display: inline-block;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+
+  .slight-hover:hover {
+    transform: scale(0.95);
+  }
+
+
+
+
+  .timer-box {
+    background-color:#14122A;
+    color: white;
+    padding: 50px;
+    width: 25vw;
+    border-radius: 20px;
+    font-size: 2.5rem;
+    font-weight: 600;
+    font-family: monospace;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  }
+  #timer {
+  background-color:#14122A ; 
+  }
+  .timer-box-orbition {
+    background:#14122A ;
+    color: white;
+    width: 30vw;
+    padding: 50px 0px;
+    border-radius: 20px;
+    font-size: 2.5rem;
+    font-weight: 600;
+    font-family: monospace;
+    box-shadow: #14122A ;
+  }
+
+
+  @media (max-width: 768px) {
+    .timer-box {
+      padding: 30px 0px;
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    #weekly-digest {
+      background-color:#14122A !important;
+    }
+
+    #weekly-photo .spaceImg {
+  
+      height: 300px !important;
+    }
+  }
+
+  footer p {
+    color: #9c9c9c;
+    padding: auto;
+  }
+
+  input:focus,
+  input:active {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2rem !important;
+    
+    }
+  }
+  .pt-3 rounded-bottom-4 {
+    width: 200px;
+    height: 200px;
+  }
+ .fixed-card-img{
+   height: 250px; /* you can adjust 200px, 300px, etc. */
+  object-fit: cover; 
+  border-top-left-radius: 12px; 
+  border-top-right-radius: 12px;
+ }
+ .custom-img-small {
+  height: 100px;
+  object-fit: cover;
+   border-radius: 12px;
+}
+
+.custom-img-medium {
+  height: 100px;
+  object-fit: cover;
+   border-radius: 12px;
+}
+
+.custom-img-large {
+  
+  height: 100px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+  .custom-img {
+    width: 100%;      /* or set a fixed width like 800px */
+    height: 400px;    /* adjust height as you want */
+    object-fit: cover; /* makes the image fill the box without distortion */
+  }
+.tag-btn {
+  background: #A259FF;     /* your custom color */
+  color: white;            /* text color */
+  padding: 0.5rem 1rem;    /* spacing */
+  border-radius: 12px;     /* rounded corners */
+  font-family: 'Work Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.tag-btn:hover {
+  background: #8b40d8;     /* slightly darker on hover */
+}
