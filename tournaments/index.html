@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title> Metanexus</title>
+		<script src="https://cdn.jsdelivr.net/npm/hashconnect@1.4.2/dist/umd/index.min.js"></script>
+
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<!-- ✅ Bootstrap CSS & JS (for responsive design) -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		<!-- ✅ Custom JavaScript for functionality -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+		<!-- Toastr CSS -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+
+		
+
+		<style >
+			/* Base Styles */
+			@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+			:root {
+				--primary-gradient: linear-gradient(135deg, #a23fd0 0%, #e97e5e 100%);
+				--button-gradient: linear-gradient(90deg, #a23fd0 0%, #e97e5e 100%);
+				--turquoise-gradient: linear-gradient(135deg, #40E0D0 0%, #27e9c3 100%);
+				--purple-gradient: linear-gradient(135deg, #a23fd0 0%, #8A2BE2 100%);
+				--yellow-gradient: linear-gradient(135deg, #ffcf4b 0%, #FF8C00 100%);
+				--pink-gradient: linear-gradient(135deg, #e97e5e 0%, #e97e5e 100%);
+				--dark-bg: #0A0915;
+				--lighter-bg: #0e0c1a;
+				--card-bg: #14122A;
+				--text-light: #ffffff;
+				--text-secondary: #a0a0b8;
+				--accent: #a23fd0;
+				--accent-pink: #e97e5e;
+				--accent-blue: #4da3ff;
+				--accent-cyan: #27e9c3;
+				--accent-yellow: #ffcf4b;
+				--accent-green: #5cff7f;
+				--accent-red: #ff5a5a;
+			}
+
+	html, body {
+  font-family: 'Poppins', 'Segoe UI', 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--dark-bg);
+  color: var(--text-light);
+  line-height: 1.6;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;          /* enable vertical scroll */
+  -ms-overflow-style: none;  /* IE/Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+/* Hide scrollbar for Chrome/Safari/Opera */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+  /* Static Header */
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: white;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 100;
+  }
+  		.logo {
+				
+  margin-right: 37px;
+  display: flex;
+				align-items: center;
+			}
+
+			.logo img {
+				height: 37px
+			
+			}
+
+       .search-bar {
+      flex: 1;
+      margin: 0 20px;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .actions button {
+      padding: 8px 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .actions .tournament {
+      background:var(--primary-gradient);
+      color: #fff;
+      border-radius: 999px;
+    }
+
+    .actions .tournament:hover {
+      background: #339edc;
+    }
+
+    .actions .scrims {
+      background:var(--primary-gradient);
+      color: #fff;
+      border-radius: 999px;
+    }
+
+    .actions .scrims:hover {
+      background: #e65a4f;
+    }
+
+  main {
+    padding: 80px 20px 20px 20px; /* leave space for header */
+  }
+
+  /* Tournament Cards */
+  
+
+  /* Overlay Info Panel */
+ #overlay { display: none;
+   position: fixed; 
+   top: 60px; /* below header */ 
+   left: 0; right: 0; bottom: 0; 
+   background: #1e1b2c; color: white;
+  
+    overflow-y: auto;
+  -ms-overflow-style: none;       /* IE/Edge */
+  scrollbar-width: none;          /* Firefox */
+    padding: 20px; z-index: 200; }
+     #overlay .home-btn { display: inline-block;
+       margin-bottom: 20px; padding: 8px 12px; background: #e97e5e; color: white; border-radius: 6px; cursor: pointer; } /* Tabs */ .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--dark-bg); display: none; /* open with flex/block in JS */ justify-content: center; align-items: center; z-index: 999; margin-top: 20px; /* lock background scrolling */ overflow: hidden; } .overlay-content { max-width: 1300px; /* fixed typo: 11 00px → 1100px */ width: 90%; max-height: 85vh; padding: 20px; border-radius: 12px; position: relative; animation: fadeIn 0.3s ease-in-out; /* enable scroll with arrows but hide scrollbar */ overflow-y: auto; -ms-overflow-style: none; /* IE/Edge */ scrollbar-width: none; /* Firefox */ }
+
+.overlay-content::-webkit-scrollbar {
+  display: none;                  /* Chrome/Safari */
+}
+
+    .overlay-content h2 {
+      color: white;
+      margin-bottom: 15px;
+    }
+
+    /* Section styling */
+    .section {
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .section h3 {
+      margin-bottom: 8px;
+      color:white;
+    }
+
+    .section p, .section ul {
+      margin: 0;
+      color: #444;
+      line-height: 1.5;
+    }
+
+    .section ul {
+      padding-left: 20px;
+    }
+
+    /* Home button */
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 22px;
+      cursor: pointer;
+      background:var(--primary-gradient);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+    }
+
+    .close-btn:hover {
+      background:var(--primary-gradient)
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: scale(0.95);}
+      to {opacity: 1; transform: scale(1);}
+    }
+
+    .tabs-wrap {
+      max-width:1300px;
+      margin: 24px auto;
+      position: relative;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #2d2659;
+      user-select: none;
+      align-items: center;
+    }
+    .tabs-indicator {
+      position: absolute;
+      bottom: -1px;
+      height: 2px;
+      background: #000;
+      width: 0px;
+      left: 0px;
+      transition: transform 200ms ease, width 200ms ease;
+      transform: translateX(0px);
+    }
+     .tabs-indicator {
+      position: absolute;
+      bottom: -1px;
+      height: 2px;
+      background: #000;
+      width: 0px;
+      left: 0px;
+      transition: transform 200ms ease, width 200ms ease;
+      transform: translateX(0px);
+    }
+.overlay-tabs { line-height: 1.6; white-space: nowrap;  align-items: center;  margin-left: 50px;  font-size: 2.5rem;  font-weight: bold;} 
+    .tab { display: inline; cursor: pointer;  margin: 0 24px;  color: linear-gradient(135deg, #a23fd0 0%, #e97e5e 100%);} 
+
+    /* Content styling */
+    #tab-content {
+      max-width: 1300px;
+      margin: 16px auto;
+      font-family: system-ui, Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+    #tab-content h2 {
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+    }
+    #tab-content p {
+      margin: 6px 0;
+    }
+
+
+
+    .separator {
+      border-top: 1px solid  #2d2659;
+      margin: 24px 0;
+    }
+
+    /* Section heading */
+    .section-heading {
+      font-weight: bold;
+      margin-bottom: 16px;
+      text-align: left;
+      font-size: 1.2rem;
+    }
+
+    /* Cards row */
+   .cards-row {
+  display: flex;
+gap:21px;
+  max-width: 1300px;             /* limit total width */
+  margin: 0 auto;                 /* center in page */
+}
+
+.card {
+  flex: 0 270px; /* fixed card width */
+  height: auto;
+  background-color: #0e0c1a;
+  border-radius: 8px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: light;
+      color: white;
+    }
+
+    .card-bottom {
+      margin-top: 50px;
+      font-size: 0.95rem;
+      color: white;
+    }
+
+    /* Just simple placeholder icons using emojis for now */
+    .icon {
+      font-size: 1.2rem;
+    }
+
+
+    .tournament-info {
+  display: flex;
+  gap: 15px;
+  margin-top: 40px;
+  flex-wrap: wrap; /* allows wrapping on smaller screens */
+  align-items: center;
+
+
+}
+
+.info-strip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px; /* pill shape */
+
+  background:  #0e0c1a;
+  color: #fff;
+  font-size: 15px;
+  white-space: nowrap;
+  margin-left: 60px;
+}
+
+.label {
+  font-weight: bold;
+  color: #ff66cc; /* pink label */
+}
+
+.value-pill {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #bb86fc; /* purple pill */
+  color: #000; /* contrast text */
+  font-weight: bold;
+}
+
+
+.prize-box {
+  display: flex;
+  max-width: 1300px;
+  margin: 30px auto;
+ 
+  border-radius: 12px;
+  background: #0e0c1a;
+  overflow: hidden;
+}
+
+/* Left (smaller) */
+.prize-total {
+  flex: 1; /* smaller */
+  background:#0e0c1a ;
+  padding: 20px;
+  text-align: center;
+  border-right: 2px solid #2d2659;
+  margin-block: 15px;  /* makes inner divider NOT touch top/bottom edges */
+}
+.prize-total h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  color: white;
+}
+.prize-total p {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Right (larger) */
+.prize-distribution {
+  flex: 2; /* larger */
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column; /* stack rows vertically */
+  gap: 60px; /* <-- control spacing between rows */
+}
+
+.distribution-row {
+  display: flex;
+  justify-content: space-between; /* pushes place left, prize right */
+  font-size: 16px;
+}
+
+
+
+.distribution-row span:first-child {
+  font-weight: bold;
+  color: white;
+}
+.distribution-row span:last-child {
+  color:white;
+  font-weight: 600;
+}
+
+
+
+.faq-container {
+  width: 100%;
+  max-width: 1700px;
+  margin: auto;
+}
+
+.faq-box {
+  background: #2a273a;
+  color: white;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.faq-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.arrow {
+  transition: transform 0.3s ease;
+}
+
+.faq-content {
+  padding: 0 16px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.faq-content.show {
+  max-height: 200px; /* adjust based on content */
+  padding: 12px 16px;
+}
+
+.faq-header .arrow.up {
+  transform: rotate(180deg);
+}
+  #tab-content {
+    margin-top: 20px;
+  }
+
+
+   .container {
+  position: relative;
+  width: 1100px;
+  max-width: 1100px;
+  background: var(--card-bg);
+  border-radius: 24px;
+margin-top:20px;
+margin-bottom: 70px;
+  font-weight: 700;
+  font-size: 2rem;
+  text-align: center;
+  padding: 80px 160px 40px 160px; /* left and right padding to make room for images */
+  user-select: none;
+  overflow: visible; /* so images can overlap inside */
+}
+
+/* Neon glow text */
+.container h2 {
+color: (--primary-gradient);
+  margin: 0 0 20px 0;
+  position: relative;
+  z-index: 10;
+}
+
+.container p {
+  font-weight: normal;
+  font-size: 0.95rem;
+  color: white;
+  margin-bottom: 30px;
+  position: relative;
+  line-height: 18px;
+  z-index: 10;
+}
+
+
+
+/* SVG styles */
+svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Images inside container, near left and right edges */
+.side-image {
+  position: absolute;
+  bottom: 0px; /* distance from bottom inside rectangle */
+  width: 620px; /* adjust size */
+  max-height: 1400px;
+  object-fit: contain;
+  z-index: 15;
+  margin-left: 1px;
+}
+
+.side-image.left {
+  /* distance from left edge inside container */
+  right: 650px;
+}
+
+.side-image.right {
+  left: 650px;
+  /* distance from right edge inside container */
+
+}
+
+@keyframes gradientMove {
+  0% { x1: 0%; x2: 200%; }
+  100% { x1: -200%; x2: 0%; }
+}
+
+#animatedGradient {
+  animation: gradientMove 6s linear infinite;
+}
+.tournament-row {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+.p3{
+font-size: 7px; 
+}
+
+.tournament-card {
+  display: block;
+  background: #1e1b2c;
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+  color: white;
+  width: 280px;
+  transition: transform 0.2s ease;
+}
+
+.tournament-card:hover {
+  transform: translateY(-6px);
+}
+
+.tournament-image {
+  position: relative;
+}
+
+.tournament-image img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+.status-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #28a745; /* green */
+  color: white;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: bold;
+}
+
+.tournament-content {
+  padding: 15px;
+}
+
+.tournament-date {
+  font-size: 13px;
+  color: #aaa;
+  margin-bottom: 6px;
+  background: none;
+}
+
+.tournament-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.tournament-info {
+  font-size: 12px;
+  color: #ccc;
+  margin-bottom: 12px;
+}
+
+.sponsor-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #2e2a3f;
+  border: none;
+  border-radius: 12px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 13px;
+  color: white;
+}
+
+.sponsor-btn img {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+.tournament-header {
+  position: relative;
+  width: 100%;
+  color: white;
+}
+
+.header-bg {
+  position: relative;
+  height: 350px;
+  overflow: hidden;
+}
+
+.header-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.6);
+}
+
+.header-bg .home-btn {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: rgba(0,0,0,0.6);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.header-card {
+  position: relative;
+  max-width: 900px;
+  margin: -80px auto 0 auto; /* pulls card over banner */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.header-card .thumbnail img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 3px solid white;
+}
+
+.header-card .info h2 {
+  margin: 0 0 10px;
+  font-size: 24px;
+}
+
+.header-card .info p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #ddd;
+}
+.info {
+
+  color: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  width: 700px;
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+  
+}
+
+.info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.tournament-info h2 {
+  margin: 0;
+  font-size: 22px;
+  color: #00ff7f;
+}
+
+.tournament-info .date {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.tournament-timer {
+  font-size: 16px;
+  font-weight: bold;
+  color:white;
+  background: var(--dark-bg);
+  padding: 6px 12px;
+  border-radius: 10px;
+}
+
+.tournament-separator {
+  margin: 15px 0;
+  border: 0;
+  border-top: 1px solid white;
+}
+
+.tournament-pills {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.pill {
+  background:darkgray;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  color: #fff;
+
+}
+
+.join-btn {
+  margin-top: 10px;
+  padding: 10px 18px;
+  border: none;
+  background: var(--primary-gradient);
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.home-btn{
+  background: var(--primary-gradient);
+}
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+
+}
+
+.empty-img {
+  width: 380px; 
+  margin-bottom:0px;
+margin-left: 400px;
+margin-top: 0px;
+}
+
+.empty-text {
+  font-size: 18px;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.empty-link {
+  display: inline-block;
+  font-size: 16px;
+  color: #a23fd0; /* gradient text option if you want */
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.empty-link:hover {
+  color: #e97e5e;
+  text-decoration: underline;
+}
+
+.empty-state h2 {
+  display: flex;
+  justify-content: space-between; /* pushes heading left, link right */
+  align-items: center;
+  margin-bottom: 16px;
+}
+</style>
+</head>
+<body>
+
+<header>
+<a href="/" class="logo">
+						<img src="https://i.postimg.cc/HL0D9WLs/Bold-Wordmark-Logo-with-Gradient-Effect-removebg-preview.png" alt="HASHTAGG Logo">
+					</a>
+
+           <div class="search-bar">
+      <input type="text" placeholder="🔍 Search tournaments or scrims...">
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="actions">
+      <button class="tournament">+ Create Tournament</button>
+      <button class="scrims">+ Scrims</button>
+    </div>
+</header>
+
+<main id="main-content">
+
+   <div class="container">
+
+    <!-- Left image inside -->
+    <img
+      src="https://i.postimg.cc/Y2WntbRV/image-removebg-preview-18.png"
+      alt="Left side"
+      class="side-image left"
+    />
+
+    <!-- Right image inside -->
+    <img
+      src="https://i.postimg.cc/Y2WntbRV/image-removebg-preview-18.png"
+      alt="right side"
+      class="side-image right"
+    />
+
+
+    
+			<h2 style="font-size: 2rem; font-weight: bold;">
+  <span class="gradient-text" style="font-weight: bold;">Play, Compete, and Conquer</span>
+</h2>
+
+<p>
+  Step into the world of <strong>Meta Nexus Tournaments</strong> —<br>
+  from casual matchups to high-stakes championship battles.<br>
+  Test your skills, rise through the ranks, and claim victory<br>
+  while earning rewards and recognition.<br>
+  Connect with rivals and allies as you chase the ultimate glory.
+</p>
+
+    <svg viewBox="0 0 1000 90" preserveAspectRatio="none" >
+      <!-- Top line with shallower flat bottom dip -->
+      <path 
+        d="
+          M 0 5
+          L 370 5
+          L 440 20
+          L 560 20
+          L 630 5
+          L 1000 5
+        " 
+        fill="transparent" 
+stroke="url(#animatedGradient)"
+
+        stroke-width="3" 
+        filter="url(#glow)"
+      />
+      
+      <!-- Bottom line with shallower flat top dip -->
+      <path 
+        d="
+          M 0 85
+          L 370 85
+          L 440 70
+          L 560 70
+          L 630 85
+          L 1000 85
+        " 
+        fill="transparent" 
+stroke="url(#animatedGradient)"
+
+        stroke-width="3" 
+        filter="url(#glow)"
+      />
+
+      <defs>
+
+    <linearGradient id="animatedGradient" gradientUnits="userSpaceOnUse" x1="0%" y1="0%" x2="200%" y2="0%">
+  <stop offset="0%" stop-color="#a23fd0" />       <!-- Purple -->
+  <stop offset="15%" stop-color="#fdd835" />      <!-- Yellow -->
+  <stop offset="30%" stop-color="#ffa500" />      <!-- Orange -->
+  <stop offset="55%" stop-color="#87cefa" />      <!-- Light Blue -->
+  <stop offset="75%" stop-color="#fdd835" />      <!-- Yellow again -->
+  <stop offset="100%" stop-color="#a23fd0" />     <!-- Purple -->
+  
+  <animate attributeName="x1" values="0%;-200%" dur="6s" repeatCount="indefinite" />
+  <animate attributeName="x2" values="200%;0%" dur="6s" repeatCount="indefinite" />
+</linearGradient>
+
+<linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+  <stop offset="0%" stop-color="#a23fd0" />       <!-- Purple -->
+  <stop offset="15%" stop-color="#fdd835" />      <!-- Yellow -->
+  <stop offset="30%" stop-color="#ffa500" />      <!-- Orange -->
+  <stop offset="55%" stop-color="#87cefa" />      <!-- Light Blue -->
+  <stop offset="75%" stop-color="#fdd835" />      <!-- Yellow again -->
+  <stop offset="100%" stop-color="#e97e5e" />     <!-- Peach -->
+</linearGradient>
+
+
+        <filter id="glow" height="200%" width="200%" x="-50%" y="-50%" >
+          <feDropShadow dx="0" dy="0" stdDeviation="4"  flood-opacity="1"/>
+          <feDropShadow dx="0" dy="0" stdDeviation="8"  flood-opacity="0.7"/>
+        </filter>
+      </defs>
+    </svg>
+
+  </div>
+
+  <h2>Upcoming Tournaments</h2>
+  <div class="tournament-row">
+    <div class="tournament-card" onclick="showTournament('Champions Cup')">
+  <div class="tournament-image">
+    <img src="https://www.lowyat.net/wp-content/uploads/2016/07/digi-clash-royale-tournament-2.jpg" alt="Tournament Poster" />
+    <span class="status-btn">Open</span>
+  </div>
+  <div class="tournament-content">
+    <p class="tournament-date">📅 Sep 2, 2025 • 8:00 PM</p>
+    <h3 class="tournament-title">Battle Royale Clash</h3>
+    <p class="tournament-info">🏆 1000 USDC • 👥 Duo Teams • 👥 3/12</p>
+    <button class="sponsor-btn">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC2-XioC_Mx6O0BXywZgpDI5lFlSZb57tf7g&s" alt="PlayZone Logo" />
+      <span>Sponsored by PlayZone</span>
+    </button>
+  </div>
+</div>
+
+
+    <div class="tournament-card" onclick="showTournament('Pro League')">
+
+  <div class="tournament-image">
+    <img src="https://editorial.uefa.com/resources/0281-182478574452-dc6b2ddc7c75-1000/fifa23_ecl_knockout_stage_day_2_photo_230423_2603_joe-brady.jpeg" alt="Tournament Poster" />
+    <span class="status-btn">Open</span>
+  </div>
+  <div class="tournament-content">
+    <p class="tournament-date">📅 Sep 2, 2025 • 8:00 PM</p>
+    <h3 class="tournament-title">Champions League</h3>
+    <p class="tournament-info">🏆 5000 USDC • 👥 Duo Teams • 👥 3/12</p>
+    <button class="sponsor-btn">
+      <img src="https://static.vecteezy.com/system/resources/thumbnails/036/706/262/small_2x/initial-letter-x-logo-design-template-vector.jpg" alt="GameX Logo" />
+      <span>Sponsored by GameX</span>
+    </button>
+  </div>
+</div>
+
+  </div>
+<br>
+<br>
+<br>
+
+    <h2>Ongoing Tournaments</h2>
+      <div class="empty-state">
+
+  <img src="https://i.postimg.cc/JhMsB4VC/image-removebg-preview.png" alt="No challenges" class="empty-img" />
+  <p class="empty-text">No Tournaments available. check back later</p>
+</div>
+
+
+    <h2>Ended Tournaments</h2>
+      <div class="empty-state">
+
+  <img src="https://i.postimg.cc/JhMsB4VC/image-removebg-preview.png" alt="No challenges" class="empty-img" />
+  <p class="empty-text">No Tournaments available. check back later</p>
+</div>
+</main>
+
+<!-- Overlay Info Panel -->
+<div id="overlay">
+
+
+
+  <div class="header" id="overlay-header"></div>
+
+  <div class="tabs" id="overlay-tabs"></div>
+  <div id="tab-content"></div>
+</div>
+
+<script>
+const tournaments = {
+  "Champions Cup": {
+  
+
+    header: `
+     <div class="tournament-header">
+  <!-- Banner Image -->
+  <div class="header-bg">
+    <img src="https://www.lowyat.net/wp-content/uploads/2016/07/digi-clash-royale-tournament-2.jpg" alt="Tournament Banner">
+    <span class="home-btn" onclick="closeOverlay()">← Home</span>
+  </div>
+
+  <!-- Glass Card -->
+  <div class="header-card">
+    <div class="thumbnail">
+      <img src="https://static.vecteezy.com/system/resources/thumbnails/036/706/262/small_2x/initial-letter-x-logo-design-template-vector.jpg" alt="Tournament Thumbnail">
+    </div>
+    <div class="info">
+  <div class="info-header">
+    <div class="tournament-info">
+      <h2>Champions Cup</h2><br>
+      <p class="date">📅 Sep 2, 2025 • 8:00 PM</p>
+    </div>
+    <div class="tournament-timer" id="countdown">
+     245d :4h : 45m
+    </div>
+  </div>
+
+  <hr class="tournament-separator" />
+
+  <div class="tournament-pills">
+    <span class="pill">Duo Teams</span>
+    <span class="pill">1000 USDC</span>
+    <span class="pill">NA Server</span>
+    <span class="pill">Knockout</span>
+  </div>
+</div>
+
+  </div>
+</div>
+
+    `,
+    tabs: {
+
+      Overview: ` <h2>🔥 DnC Practice Scrims – Free Fire MAX 🔥</h2>
+          <p><em>Presented by DnC Esports in collaboration with BattleXO</em>, this is your chance to <strong>Practice & Win Diamonds!</strong> Get ready to sharpen your squad synergy, challenge the best, and climb the ranks in intense Free Fire custom room battles.</p>
+
+          <p>💎 Daily Scrims<br>
+          ⚔️ Competitive 4v4 Matchups<br>
+          🎁 Win Free Diamonds<br>
+          🏆 Build your legacy in the esports scene</p>
+
+          <p><strong>Join now</strong> and become part of the next wave of competitive Free Fire warriors.</p>
+
+          <div class="separator"></div>
+          <div class="section-heading">Format</div>
+          <div class="cards-row">
+            <div class="card"><div class="card-top">⏰ Check-in time</div><div class="card-bottom">15 min before start</div></div>
+            <div class="card"><div class="card-top">👥 Team size</div><div class="card-bottom">Squad</div></div>
+            <div class="card"><div class="card-top">🏆 Prizepool</div><div class="card-bottom">800</div></div>
+            <div class="card"><div class="card-top">🎟️ Slots</div><div class="card-bottom">11</div></div>
+            <div class="card"><div class="card-top">👥 Registered</div><div class="card-bottom">1/12</div></div>
+          </div>
+
+          <div class="tournament-info">
+            <div class="info-strip"><span class="label">Rounds:</span><span class="value-pill">4</span></div>
+            <div class="info-strip"><span class="label">Round Type:</span><span class="value-pill">Best of 3</span></div>
+            <div class="info-strip"><span class="label">Teams:</span><span class="value-pill">12</span></div>
+            <div class="info-strip"><span class="label">Mode:</span><span class="value-pill">Scrims</span></div>
+          </div>
+
+          <div class="separator"></div>
+          <section class="prize-section">
+            <div class="prize-box">
+              <div class="prize-total"><h3>Total Prize</h3><p>3,000 USDT</p></div>
+              <div class="prize-distribution">
+                <div class="distribution-row"><span>🏆 First Place</span><span>1,500 USDT</span></div>
+                <div class="distribution-row"><span>🥈 Second Place</span><span>1,000 USDT</span></div>
+                <div class="distribution-row"><span>🥉 Third Place</span><span>500 USDT</span></div>
+              </div>
+            </div>
+          </section>
+
+          <div class="separator"></div>
+         <div class="faq-container">
+  <div class="faq-box">
+    <div class="faq-header" onclick="toggleFAQ(this)">
+      <span>how to join a tournament </span>
+      <span class="arrow">&#9660;</span>
+    </div>
+    <div class="faq-content">
+      <p>
+        Joining a  tournament is easy. However before joining please ensure the following:
+       <ul>
+  <li>All team members have logged into their MetaNexus account.</li>
+  <li>Team profile for the particular game has been created and all members have been invited and added.</li>
+</ul>
+
+<p>To join a tournament follow these steps:</p>
+
+<ul>
+  <li>Step 1: Navigate to the <strong>Tournaments Page</strong> and select your preferred tournament.</li>
+  <li>Step 2: Click on <strong>Join Tournament</strong>.</li>
+  <li>Step 3: Fill the slots with the desired team members.</li>
+  <li>Step 4: Click on the <strong>Join</strong> button.</li>
+  <li>You will receive a confirmation notification on the top right corner of the screen.</li>
+</ul>
+</p>
+    </div>
+  </div>
+
+  <div class="faq-box">
+    <div class="faq-header" onclick="toggleFAQ(this)">
+      <span>tournament rules</span>
+      <span class="arrow">&#9660;</span>
+    </div>
+    <div class="faq-content">
+      <p><ol>
+  <li>All participants must have a valid MetaNexus account.</li>
+  <li>Players must join the tournament before the registration deadline.</li>
+  <li>Team rosters must remain unchanged once the tournament begins.</li>
+  <li>Cheating, hacking, or exploiting bugs will result in immediate disqualification.</li>
+  <li>All matches must be played on the designated platform and game version.</li>
+  <li>Players must respect referees, admins, and other competitors at all times.</li>
+  <li>No abusive, offensive, or disrespectful behavior is tolerated.</li>
+  <li>If a team fails to show up within the allocated time, it may result in a forfeit.</li>
+  <li>Any disputes must be reported to tournament admins immediately.</li>
+  <li>The decision of the MetaNexus tournament officials is final.</li>
+</ol></p>
+    </div>
+  </div>
+</div>
+      
+       `,
+  
+      Schedule: `<h2>Schedule</h2>
+                 <ul>
+                   <li>Day 1: Qualifiers</li>
+                   <li>Day 2: Semi-Finals</li>
+                   <li>Day 3: Finals</li>
+                 </ul>`,
+      Live: `<h2>Live Matches</h2>
+             <p>No live matches currently. Check back later.</p>`,
+      Credentials: `<h2>Credentials</h2>
+                    <p>All participants must be logged into MetaNexus with their registered team.</p>`,
+      Results: `<h2>Results</h2>
+                <p>Results will be published after the end of each round.</p>`,
+      Teams: `<h2>Teams</h2>
+              <p>12 teams are registered for this tournament.</p>`
+    }
+      
+  },
+
+  "Pro League": {
+    tabs: {
+      Overview: `<h2>Pro League Overview</h2>
+                 <p>The Pro League is a high-stakes tournament featuring the top competitive squads.</p>`,
+      Schedule: `<h2>Schedule</h2>
+      hey
+                 <ul>
+                   <li>Day 1: Group Stage</li>
+                   <li>Day 2: Quarter-Finals</li>
+                   <li>Day 3: Semi-Finals</li>
+                   <li>Day 4: Finals</li>
+                   hey
+                 </ul>`,
+      Live: `<h2>Live Matches</h2>
+             <p>Streaming all matches live on MetaNexus platform.</p>`,
+      Credentials: `<h2>Credentials</h2>
+                    <p>Only verified Pro League players are allowed.</p>`,
+      Results: `<h2>Results</h2>
+                <p>Check back here for up-to-date leaderboard standings.</p>`,
+      Teams: `<h2>Teams</h2>
+              <p>16 professional teams are competing in this league.</p>`
+    }
+  }
+};
+ function startCountdown(targetDate, elementId) {
+    const countDownDate = new Date(targetDate).getTime();
+    const countdownElement = document.getElementById(elementId);
+
+    setInterval(function () {
+      const now = new Date().getTime();
+      const distance = countDownDate - now;
+
+      if (distance < 0) {
+        countdownElement.innerHTML = "Tournament Started!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor(
+        (distance % (1000 * 60 * 60)) / (1000 * 60)
+      );
+
+      countdownElement.innerHTML = `${days}d : ${hours}h : ${minutes}m`;
+    }, 1000);
+  }
+
+  // Example: Countdown to Sep 2, 2025 8:00 PM
+  startCountdown("august 26, 202600:00:00", "countdown");
+
+function toggleFAQ(header) {
+  const content = header.nextElementSibling;
+  const arrow = header.querySelector('.arrow');
+  content.classList.toggle('show');
+  arrow.classList.toggle('up');
+}
+function showTournament(name) {
+  const tournament = tournaments[name];
+  const overlay = document.getElementById('overlay');
+  const tabsDiv = document.getElementById('overlay-tabs');
+  const contentDiv = document.getElementById('tab-content');
+   // Inject header
+  document.getElementById("overlay-header").innerHTML = tournament.header;
+
+  overlay.style.display = 'block';
+  tabsDiv.innerHTML = '';
+  
+  let first = true;
+  for (let tabName in tournament.tabs) {
+    const tab = document.createElement('div');
+    tab.classList.add('tab');
+    tab.innerText = tabName;
+    if (first) {
+      tab.classList.add('active');
+      contentDiv.innerHTML = tournament.tabs[tabName];
+      first = false;
+    }
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      contentDiv.innerHTML = tournament.tabs[tabName];
+    });
+    tabsDiv.appendChild(tab);
+  }
+}
+
+function closeOverlay() {
+  document.getElementById('overlay').style.display = 'none';
+}
+
+
+
+
+
+</script>
+
+</body>
+</html>
