@@ -1,1 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title> Metanexus</title>
+		<script src="https://cdn.jsdelivr.net/npm/hashconnect@1.4.2/dist/umd/index.min.js"></script>
+
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<!-- ✅ Bootstrap CSS & JS (for responsive design) -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		<!-- ✅ Custom JavaScript for functionality -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+		<!-- Toastr CSS -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+		
+
+		<style >
+			/* Base Styles */
+			@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+			:root {
+				--primary-gradient: linear-gradient(135deg, #a23fd0 0%, #e97e5e 100%);
+				--button-gradient: linear-gradient(90deg, #a23fd0 0%, #e97e5e 100%);
+				--turquoise-gradient: linear-gradient(135deg, #40E0D0 0%, #27e9c3 100%);
+				--purple-gradient: linear-gradient(135deg, #a23fd0 0%, #8A2BE2 100%);
+				--yellow-gradient: linear-gradient(135deg, #ffcf4b 0%, #FF8C00 100%);
+				--pink-gradient: linear-gradient(135deg, #e97e5e 0%, #e97e5e 100%);
+				--dark-bg: #0A0915;
+				--lighter-bg: #0e0c1a;
+				--card-bg: #14122A;
+				--text-light: #ffffff;
+				--text-secondary: #a0a0b8;
+				--accent: #a23fd0;
+				--accent-pink: #e97e5e;
+				--accent-blue: #4da3ff;
+				--accent-cyan: #27e9c3;
+				--accent-yellow: #ffcf4b;
+				--accent-green: #5cff7f;
+				--accent-red: #ff5a5a;
+			}
+
+			body {
+				font-family: 'Poppins', 'Segoe UI', 'Arial', sans-serif;
+				margin: 0;
+				padding: 0;
+				background-color: var(--dark-bg);
+				color: var(--text-light);
+				line-height: 1.6;
+				position: relative;
+				overflow-x: hidden;
+				width: 100%;
+				max-width: 100%;
+                 height: 200%;
+
+			}
+
+    header {
+     background: var(--dark-bg);
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      color: white;
+      font-size: 1.5em;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    nav {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 1em;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+  nav a.active {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  border-bottom: 2px solid transparent;
+  border-image: var(--primary-gradient) 1;
+  padding-bottom: 3px;
+}
+
+    section {
+      display: none;
+      padding: 40px 20px;
+    }
+
+    section.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <a href="/Dashboard" class="logo">Metanexus</a>
+    <nav>
+      <a href="#" data-section="stats" class="active">Stats</a>
+      <a href="#" data-section="fantasy">Antsy League</a>
+      <a href="#" data-section="predictions">Predictions</a>
+      <a href="#" data-section="risk">Risk Management</a>
+    </nav>
+  </header>
+
+  <!-- Sections -->
+  <section id="stats" class="active">
+    <h2>📊 Stats</h2>
+    <p>Here you’ll see player & team performance stats.</p>
+  </section>
+
+  <section id="fantasy">
+    <h2>🏆 Antsy League</h2>
+    <p>Fantasy League module goes here.</p>
+  </section>
+
+  <section id="predictions">
+    <h2>🎯 Predictions</h2>
+    <p>Prediction markets & betting simulation.</p>
+  </section>
+
+  <section id="risk">
+    <h2>🛡️ Risk Management</h2>
+    <p>Track credits, progress bar & safe play tips.</p>
+  </section>
+
+  <script>
+    // Handle nav toggle clicks
+    const navLinks = document.querySelectorAll("nav a");
+    const sections = document.querySelectorAll("section");
+
+    navLinks.forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+
+        // remove active states
+        navLinks.forEach(l => l.classList.remove("active"));
+        sections.forEach(s => s.classList.remove("active"));
+
+        // activate current
+        link.classList.add("active");
+        const sectionId = link.getAttribute("data-section");
+        document.getElementById(sectionId).classList.add("active");
+      });
+    });
+  </script>
+</body>
+</html>
 
