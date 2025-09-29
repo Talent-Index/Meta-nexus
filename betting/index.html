@@ -111,7 +111,10 @@
 
     section.active {
       display: block;
-    }
+      
+}
+
+    
   </style>
 </head>
 <body>
@@ -128,8 +131,10 @@
 
   <!-- Sections -->
   <section id="stats" class="active">
-    <h2>📊 Stats</h2>
-    <p>Here you’ll see player & team performance stats.</p>
+  <section id="stats" class="active">
+  <embed src="bets.html" width="100%" height="600px" style="border:none;">
+</section>
+
   </section>
 
   <section id="fantasy">
@@ -148,6 +153,11 @@
   </section>
 
   <script>
+
+
+  
+  // Function to load bets.html content into #stats
+ 
     // Handle nav toggle clicks
     const navLinks = document.querySelectorAll("nav a");
     const sections = document.querySelectorAll("section");
