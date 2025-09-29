@@ -1,1 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title> Metanexus</title>
+		<script src="https://cdn.jsdelivr.net/npm/hashconnect@1.4.2/dist/umd/index.min.js"></script>
+
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<!-- ✅ Bootstrap CSS & JS (for responsive design) -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		<!-- ✅ Custom JavaScript for functionality -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+		<!-- Toastr CSS -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+		
+
+		<style >
+			/* Base Styles */
+			@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+			:root {
+				--primary-gradient: linear-gradient(135deg, #a23fd0 0%, #e97e5e 100%);
+				--button-gradient: linear-gradient(90deg, #a23fd0 0%, #e97e5e 100%);
+				--turquoise-gradient: linear-gradient(135deg, #40E0D0 0%, #27e9c3 100%);
+				--purple-gradient: linear-gradient(135deg, #a23fd0 0%, #8A2BE2 100%);
+				--yellow-gradient: linear-gradient(135deg, #ffcf4b 0%, #FF8C00 100%);
+				--pink-gradient: linear-gradient(135deg, #e97e5e 0%, #e97e5e 100%);
+				--dark-bg: #0A0915;
+				--lighter-bg: #0e0c1a;
+				--card-bg: #14122A;
+				--text-light: #ffffff;
+				--text-secondary: #a0a0b8;
+				--accent: #a23fd0;
+				--accent-pink: #e97e5e;
+				--accent-blue: #4da3ff;
+				--accent-cyan: #27e9c3;
+				--accent-yellow: #ffcf4b;
+				--accent-green: #5cff7f;
+				--accent-red: #ff5a5a;
+			}
+
+			  body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+    }
+            
+    /* Left and Right bars (static) */
+    .sidebar {
+      width: 20%;
+      background: var(--dark-bg);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar h2 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #333;
+      padding-bottom: 0.5rem;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar ul li {
+      margin: 0.5rem 0;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+
+    .sidebar ul li:hover {
+      background: #333;
+    }
+
+    /* Middle scrollable content */
+    .middle {
+      flex: 1;
+      background: var(--lighter-bg);
+      padding: 1rem;
+      overflow-y: auto;
+    }
+
+    .match {
+      background: #222;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-radius: 8px;
+    }
+
+    .match h3 {
+      margin: 0 0 0.5rem;
+    }
+
+    /* Right bar */
+    .rightbar {
+      width: 20%;
+      background:var(--dark-bg);
+      padding: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Left bar -->
+  <div class="sidebar" id="left-bar">
+    <h2>Top Tournaments</h2>
+    <ul>
+      <li onclick="loadMatches('Valorant')">Valorant</li>
+      <li onclick="loadMatches('Dota 2')">Dota 2</li>
+      <li onclick="loadMatches('CS2')">CS2</li>
+      <li onclick="loadMatches('LoL')">League of Legends</li>
+    </ul>
+  </div>
+
+  <!-- Middle scrollable bar -->
+  <div class="middle" id="middle-bar">
+    <h2>Select a tournament to see matches</h2>
+  </div>
+
+  <!-- Right bar -->
+  <div class="rightbar" id="right-bar">
+    <h2>Extras</h2>
+    <p>Could be odds, stats, or Metanexus Originals here.</p>
+  </div>
+
+  <script>
+    function loadMatches(game) {
+      const middle = document.getElementById("middle-bar");
+      middle.innerHTML = `<h2>${game} Matches</h2>`;
+
+      // Dummy matches for now
+      const matches = {
+        "Valorant": ["Team Alpha vs Team Omega", "Dragons vs Phoenix"],
+        "Dota 2": ["OG vs Secret", "Liquid vs Nigma"],
+        "CS2": ["Navi vs Faze", "Astralis vs G2"],
+        "LoL": ["T1 vs GenG", "FNC vs MAD"]
+      };
+
+      matches[game].forEach(m => {
+        middle.innerHTML += `
+          <div class="match">
+            <h3>${m}</h3>
+            <p>Status: Ongoing</p>
+          </div>`;
+      });
+    }
+  </script>
+</body>
+</html>
+
+
+
 
